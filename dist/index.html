@@ -763,6 +763,10 @@
               <label for="live-filter-type-video">Video</label>
             </div>
             <div class="checkbox-group">
+              <input type="checkbox" id="live-filter-type-audio" />
+              <label for="live-filter-type-audio">Audio</label>
+            </div>
+            <div class="checkbox-group">
               <input type="checkbox" id="live-filter-type-icon" />
               <label for="live-filter-type-icon">Icon & Graphics</label>
             </div>
@@ -804,6 +808,10 @@
               <label for="allowUseVideo">Video</label>
             </div>
             <div class="checkbox-group">
+              <input type="checkbox" id="allowUseAudio" />
+              <label for="allowUseAudio">Audio</label>
+            </div>
+            <div class="checkbox-group">
               <input type="checkbox" id="allowUseIcon" />
               <label for="allowUseIcon">Icon & Graphic</label>
             </div>
@@ -836,6 +844,10 @@
             <div class="checkbox-group">
               <input type="checkbox" id="prefilter-type-video" />
               <label for="prefilter-type-video">Video</label>
+            </div>
+            <div class="checkbox-group">
+              <input type="checkbox" id="prefilter-type-audio" />
+              <label for="prefilter-type-audio">Audio</label>
             </div>
             <div class="checkbox-group">
               <input type="checkbox" id="prefilter-type-icon" />
@@ -1084,6 +1096,7 @@
         livePreview: document.getElementById('livePreview'),
         liveFilterTypeImage: document.getElementById('live-filter-type-image'),
         liveFilterTypeVideo: document.getElementById('live-filter-type-video'),
+        liveFilterTypeAudio: document.getElementById('live-filter-type-audio'),
         liveFilterTypeIcon: document.getElementById('live-filter-type-icon'),
         liveFilterTypeDesign: document.getElementById('live-filter-type-design'),
         liveFilterTypeDocument: document.getElementById('live-filter-type-document'),
@@ -1091,6 +1104,7 @@
         liveFilterSort: document.getElementById('live-filter-sort'),
         prefilterTypeImage: document.getElementById('prefilter-type-image'),
         prefilterTypeVideo: document.getElementById('prefilter-type-video'),
+        prefilterTypeAudio: document.getElementById('prefilter-type-audio'),
         prefilterTypeIcon: document.getElementById('prefilter-type-icon'),
         prefilterTypeDesign: document.getElementById('prefilter-type-design'),
         prefilterTypeDocument: document.getElementById('prefilter-type-document'),
@@ -1119,6 +1133,7 @@
         enableFlipbook: document.getElementById('enableFlipbook'),
         allowUseImage: document.getElementById('allowUseImage'),
         allowUseVideo: document.getElementById('allowUseVideo'),
+        allowUseAudio: document.getElementById('allowUseAudio'),
         allowUseIcon: document.getElementById('allowUseIcon'),
         allowUseDesign: document.getElementById('allowUseDesign'),
         allowUseDocument: document.getElementById('allowUseDocument'),
@@ -1214,6 +1229,7 @@
         const allowUseTypes = [];
         if (elements.allowUseImage.checked) allowUseTypes.push('image');
         if (elements.allowUseVideo.checked) allowUseTypes.push('video');
+        if (elements.allowUseAudio.checked) allowUseTypes.push('audio');
         if (elements.allowUseIcon.checked) allowUseTypes.push('icon');
         if (elements.allowUseDesign.checked) allowUseTypes.push('design');
         if (elements.allowUseDocument.checked) allowUseTypes.push('document');
@@ -1264,6 +1280,7 @@
         const liveFilterAssetType = [];
         if (elements.liveFilterTypeImage.checked) liveFilterAssetType.push('image');
         if (elements.liveFilterTypeVideo.checked) liveFilterAssetType.push('video');
+        if (elements.liveFilterTypeAudio.checked) liveFilterAssetType.push('audio');
         if (elements.liveFilterTypeIcon.checked) liveFilterAssetType.push('icon');
         if (elements.liveFilterTypeDesign.checked) liveFilterAssetType.push('design');
         if (elements.liveFilterTypeDocument.checked) liveFilterAssetType.push('document');
@@ -1283,6 +1300,7 @@
         const initialAssetType = [];
         if (elements.prefilterTypeImage.checked) initialAssetType.push('image');
         if (elements.prefilterTypeVideo.checked) initialAssetType.push('video');
+        if (elements.prefilterTypeAudio.checked) initialAssetType.push('audio');
         if (elements.prefilterTypeIcon.checked) initialAssetType.push('icon');
         if (elements.prefilterTypeDesign.checked) initialAssetType.push('design');
         if (elements.prefilterTypeDocument.checked) initialAssetType.push('document');
@@ -1618,6 +1636,7 @@ assetLibrary.<span class="function">openSidebar</span>(${sidebarStr});`;
         elements.liveFilterTypeIcon.checked = false;
         elements.liveFilterTypeImage.checked = false;
         elements.liveFilterTypeVideo.checked = false;
+        elements.liveFilterTypeAudio.checked = false;
         elements.liveFilterTypeDesign.checked = false;
         elements.liveFilterTypeDocument.checked = false;
         elements.liveFilterTags.value = '';
@@ -1625,6 +1644,7 @@ assetLibrary.<span class="function">openSidebar</span>(${sidebarStr});`;
         elements.prefilterTypeIcon.checked = false;
         elements.prefilterTypeImage.checked = false;
         elements.prefilterTypeVideo.checked = false;
+        elements.prefilterTypeAudio.checked = false;
         elements.prefilterTypeDesign.checked = false;
         elements.prefilterTypeDocument.checked = false;
         elements.prefilterTags.value = '';
@@ -1650,6 +1670,7 @@ assetLibrary.<span class="function">openSidebar</span>(${sidebarStr});`;
         elements.saveAsNewCopy.checked = false;
         elements.allowUseImage.checked = false;
         elements.allowUseVideo.checked = false;
+        elements.allowUseAudio.checked = false;
         elements.allowUseIcon.checked = false;
         elements.allowUseDesign.checked = false;
         elements.allowUseDocument.checked = false;
@@ -1690,11 +1711,13 @@ assetLibrary.<span class="function">openSidebar</span>(${sidebarStr});`;
         elements.enableFlipbook,
         elements.allowUseImage,
         elements.allowUseVideo,
+        elements.allowUseAudio,
         elements.allowUseIcon,
         elements.allowUseDesign,
         elements.allowUseDocument,
         elements.liveFilterTypeImage,
         elements.liveFilterTypeVideo,
+        elements.liveFilterTypeAudio,
         elements.liveFilterTypeIcon,
         elements.liveFilterTypeDesign,
         elements.liveFilterTypeDocument,
@@ -1707,6 +1730,7 @@ assetLibrary.<span class="function">openSidebar</span>(${sidebarStr});`;
         elements.prefilterTypeIcon,
         elements.prefilterTypeImage,
         elements.prefilterTypeVideo,
+        elements.prefilterTypeAudio,
         elements.prefilterTypeDesign,
         elements.prefilterTypeDocument,
         elements.prefilterTags,
