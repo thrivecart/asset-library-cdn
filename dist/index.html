@@ -945,6 +945,10 @@
             <label for="showHelpscout">Show Help Widget</label>
           </div>
           <div class="checkbox-group">
+            <input type="checkbox" id="showHeaderTitle" />
+            <label for="showHeaderTitle">Show header title and subtitle</label>
+          </div>
+          <div class="checkbox-group">
             <input type="checkbox" id="showClose" checked />
             <label for="showClose">Show Close Button</label>
           </div>
@@ -1123,6 +1127,7 @@
         fontFamily: document.getElementById('fontFamily'),
         multiSelect: document.getElementById('multiSelect'),
         showHelpscout: document.getElementById('showHelpscout'),
+        showHeaderTitle: document.getElementById('showHeaderTitle'),
         showClose: document.getElementById('showClose'),
         showAITools: document.getElementById('showAITools'),
         showEditButton: document.getElementById('showEditButton'),
@@ -1214,6 +1219,7 @@
           features: {
             multiSelect: elements.multiSelect.checked,
             showHelpscout: elements.showHelpscout.checked,
+            showHeaderTitle: elements.showHeaderTitle.checked,
             showClose: elements.showClose.checked,
             showAITools: elements.showAITools.checked,
             showEditButton: elements.showEditButton.checked,
@@ -1360,6 +1366,7 @@
         preview.setAttribute('fonts-family', config.theme.fonts.family);
         preview.setAttribute('multi-select', String(config.features.multiSelect));
         preview.setAttribute('show-helpscout', String(config.features.showHelpscout));
+        preview.setAttribute('show-header-title', String(config.features.showHeaderTitle));
         preview.setAttribute('show-close', String(config.features.showClose));
         preview.setAttribute('show-ai-tools', String(config.features.showAITools));
         preview.setAttribute('show-edit-button', String(config.features.showEditButton));
@@ -1445,6 +1452,7 @@ assetLibrary.<span class="function">openSidebar</span>(${sidebarStr});`;
         attrs.push(`fonts-family="${config.theme.fonts.family}"`);
         attrs.push(`multi-select="${config.features.multiSelect}"`);
         attrs.push(`show-helpscout="${config.features.showHelpscout}"`);
+        attrs.push(`show-header-title="${config.features.showHeaderTitle}"`);
         attrs.push(`show-close="${config.features.showClose}"`);
         attrs.push(`show-ai-tools="${config.features.showAITools}"`);
         attrs.push(`show-edit-button="${config.features.showEditButton}"`);
@@ -1662,6 +1670,7 @@ assetLibrary.<span class="function">openSidebar</span>(${sidebarStr});`;
         elements.fontFamily.value = 'Inter, system-ui, sans-serif';
         elements.multiSelect.checked = true;
         elements.showHelpscout.checked = false;
+        elements.showHeaderTitle.checked = false;
         elements.showClose.checked = true;
         elements.showAITools.checked = true;
         elements.showEditButton.checked = true;
@@ -1701,6 +1710,7 @@ assetLibrary.<span class="function">openSidebar</span>(${sidebarStr});`;
         elements.fontFamily,
         elements.multiSelect,
         elements.showHelpscout,
+        elements.showHeaderTitle,
         elements.showClose,
         elements.showAITools,
         elements.showEditButton,
