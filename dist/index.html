@@ -794,7 +794,7 @@
             </select>
           </div>
           <div class="config-group">
-            <label>Allow Use Types <small>(none = all allowed)</small></label>
+            <label>Allow Use Types <small>(none = Use hidden)</small></label>
             <div class="checkbox-group">
               <input type="checkbox" id="allowUseDesign" />
               <label for="allowUseDesign">Design</label>
@@ -945,7 +945,7 @@
             <label for="showHelpscout">Show Help Widget</label>
           </div>
           <div class="checkbox-group">
-            <input type="checkbox" id="showHeaderTitle" />
+            <input type="checkbox" id="showHeaderTitle" checked />
             <label for="showHeaderTitle">Show header title and subtitle</label>
           </div>
           <div class="checkbox-group">
@@ -1670,7 +1670,7 @@ assetLibrary.<span class="function">openSidebar</span>(${sidebarStr});`;
         elements.fontFamily.value = 'Inter, system-ui, sans-serif';
         elements.multiSelect.checked = true;
         elements.showHelpscout.checked = false;
-        elements.showHeaderTitle.checked = false;
+        elements.showHeaderTitle.checked = true;
         elements.showClose.checked = true;
         elements.showAITools.checked = true;
         elements.showEditButton.checked = true;
