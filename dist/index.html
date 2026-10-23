@@ -961,6 +961,10 @@
             <label for="showEditButton">Show Edit Button</label>
           </div>
           <div class="checkbox-group">
+            <input type="checkbox" id="showUseButton" checked />
+            <label for="showUseButton">Show Use Button</label>
+          </div>
+          <div class="checkbox-group">
             <input type="checkbox" id="showStockImages" />
             <label for="showStockImages">Show Stock Images Tab</label>
           </div>
@@ -1131,6 +1135,7 @@
         showClose: document.getElementById('showClose'),
         showAITools: document.getElementById('showAITools'),
         showEditButton: document.getElementById('showEditButton'),
+        showUseButton: document.getElementById('showUseButton'),
         showStockImages: document.getElementById('showStockImages'),
         showStockIcons: document.getElementById('showStockIcons'),
         showMigrationBanner: document.getElementById('showMigrationBanner'),
@@ -1223,6 +1228,7 @@
             showClose: elements.showClose.checked,
             showAITools: elements.showAITools.checked,
             showEditButton: elements.showEditButton.checked,
+            showUseButton: elements.showUseButton.checked,
             showStockImages: elements.showStockImages.checked,
             showStockIcons: elements.showStockIcons.checked,
             showMigrationBanner: elements.showMigrationBanner.checked,
@@ -1370,6 +1376,7 @@
         preview.setAttribute('show-close', String(config.features.showClose));
         preview.setAttribute('show-ai-tools', String(config.features.showAITools));
         preview.setAttribute('show-edit-button', String(config.features.showEditButton));
+        preview.setAttribute('show-use-button', String(config.features.showUseButton));
         preview.setAttribute('show-stock-images', String(config.features.showStockImages));
         preview.setAttribute('show-stock-icons', String(config.features.showStockIcons));
         preview.setAttribute('show-migration-banner', String(config.features.showMigrationBanner));
@@ -1456,6 +1463,7 @@ assetLibrary.<span class="function">openSidebar</span>(${sidebarStr});`;
         attrs.push(`show-close="${config.features.showClose}"`);
         attrs.push(`show-ai-tools="${config.features.showAITools}"`);
         attrs.push(`show-edit-button="${config.features.showEditButton}"`);
+        attrs.push(`show-use-button="${config.features.showUseButton}"`);
         attrs.push(`show-stock-images="${config.features.showStockImages}"`);
         attrs.push(`show-stock-icons="${config.features.showStockIcons}"`);
         attrs.push(`show-migration-banner="${config.features.showMigrationBanner}"`);
@@ -1674,6 +1682,7 @@ assetLibrary.<span class="function">openSidebar</span>(${sidebarStr});`;
         elements.showClose.checked = true;
         elements.showAITools.checked = true;
         elements.showEditButton.checked = true;
+        elements.showUseButton.checked = true;
         elements.showStockImages.checked = false;
         elements.showMigrationBanner.checked = false;
         elements.saveAsNewCopy.checked = false;
@@ -1714,6 +1723,7 @@ assetLibrary.<span class="function">openSidebar</span>(${sidebarStr});`;
         elements.showClose,
         elements.showAITools,
         elements.showEditButton,
+        elements.showUseButton,
         elements.showStockImages,
         elements.showStockIcons,
         elements.showMigrationBanner,
