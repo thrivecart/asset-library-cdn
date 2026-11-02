@@ -1408,6 +1408,15 @@
       // ============================================
       // CODE GENERATION
       // ============================================
+      function escapeHtml(value) {
+        return String(value)
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#39;');
+      }
+
       function generateJSCode() {
         const config = getConfig();
         const sidebar = getSidebarConfig();
@@ -1431,13 +1440,13 @@
           .replace(/"/g, "'");
 
         return `<span class="comment">// Create Asset Library instance</span>
-<span class="keyword">const</span> assetLibrary = <span class="property">window</span>.<span class="property">PiktochartAssetLibrary</span>.<span class="function">create</span>(${configStr});
+<span class="keyword">const</span> assetLibrary = <span class="property">window</span>.<span class="property">PiktochartAssetLibrary</span>.<span class="function">create</span>(${escapeHtml(configStr)});
 
 <span class="comment">// Open as modal</span>
 assetLibrary.<span class="function">openModal</span>();
 
 <span class="comment">// Or open as sidebar</span>
-assetLibrary.<span class="function">openSidebar</span>(${sidebarStr});`;
+assetLibrary.<span class="function">openSidebar</span>(${escapeHtml(sidebarStr)});`;
       }
 
       function generateHTMLCode() {
@@ -1499,7 +1508,7 @@ assetLibrary.<span class="function">openSidebar</span>(${sidebarStr});`;
      .map((a) => {
        const [name, ...valueParts] = a.split('=');
        const value = valueParts.join('=');
-       return `<span class="attr">${name}</span>=<span class="string">${value}</span>`;
+       return `<span class="attr">${escapeHtml(name)}</span>=<span class="string">${escapeHtml(value)}</span>`;
      })
      .join('\n  ')}
 <span class="tag">&gt;&lt;/piktochart-asset-library&gt;</span>`;
@@ -1514,11 +1523,28 @@ assetLibrary.<span class="function">openSidebar</span>(${sidebarStr});`;
       // ============================================
       function logEvent(type, data) {
         const time = new Date().toLocaleTimeString();
-        const dataStr = data ? JSON.stringify(data).slice(0, 80) + (JSON.stringify(data).length > 80 ? '...' : '') : '';
+        const serialized = data ? JSON.stringify(data) : '';
+        const dataStr = serialized ? serialized.slice(0, 80) + (serialized.length > 80 ? '...' : '') : '';
 
         const item = document.createElement('div');
         item.className = 'event-item';
-        item.innerHTML = `<span class="time">[${time}]</span> <span class="type">${type}</span>${dataStr ? ` <span class="data">${dataStr}</span>` : ''}`;
+
+        const timeEl = document.createElement('span');
+        timeEl.className = 'time';
+        timeEl.textContent = `[${time}]`;
+
+        const typeEl = document.createElement('span');
+        typeEl.className = 'type';
+        typeEl.textContent = type;
+
+        item.append(timeEl, ' ', typeEl);
+
+        if (dataStr) {
+          const dataEl = document.createElement('span');
+          dataEl.className = 'data';
+          dataEl.textContent = dataStr;
+          item.append(' ', dataEl);
+        }
 
         elements.eventLog.appendChild(item);
         elements.eventLog.scrollTop = elements.eventLog.scrollHeight;
@@ -1837,7 +1863,13 @@ assetLibrary.<span class="function">openSidebar</span>(${sidebarStr});`;
       });
 
       elements.clearLogBtn.addEventListener('click', () => {
-        elements.eventLog.innerHTML = `<div class="event-item"><span class="comment">// Events cleared</span></div>`;
+        const item = document.createElement('div');
+        item.className = 'event-item';
+        const comment = document.createElement('span');
+        comment.className = 'comment';
+        comment.textContent = '// Events cleared';
+        item.append(comment);
+        elements.eventLog.replaceChildren(item);
       });
 
       // Theme toggle
@@ -1930,10 +1962,14 @@ assetLibrary.<span class="function">openSidebar</span>(${sidebarStr});`;
         if (asset.size) info.push(`File size: ${(asset.size / 1024).toFixed(2)} KB`);
         if (asset.duration) info.push(`Duration: ${asset.duration}s`);
 
-        elements.droppedAssetInfo.innerHTML =
-          info.length > 0
-            ? `<strong>${isImageType ? '🖼️' : '🎥'} ${isImageType ? 'Image' : 'Video'}</strong><br>${info.join(' • ')}`
-            : `<strong>${isImageType ? '🖼️' : '🎥'} ${isImageType ? 'Image' : 'Video'}</strong>`;
+        const heading = document.createElement('strong');
+        heading.textContent = `${isImageType ? '🖼️' : '🎥'} ${isImageType ? 'Image' : 'Video'}`;
+        elements.droppedAssetInfo.replaceChildren(heading);
+        if (info.length > 0) {
+          const meta = document.createElement('span');
+          meta.textContent = info.join(' • ');
+          elements.droppedAssetInfo.append(document.createElement('br'), meta);
+        }
 
         if (!skipLog) {
           logEvent('drop', {
