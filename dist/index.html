@@ -712,6 +712,7 @@
             <label for="apiToken">API Token (JSON)</label>
             <textarea
               id="apiToken"
+              class="mp-block"
               rows="7"
               placeholder='{
                 "access_token": "eyJhbGciOi...",
@@ -1039,6 +1040,7 @@
         <div class="preview-container" id="previewContainer">
           <piktochart-asset-library
             id="livePreview"
+            class="mp-block"
             mode="inline"
             colors-primary="#00868c"
             colors-secondary="#02CBC9"
@@ -1089,7 +1091,12 @@
     <div class="toast" id="toast">Copied to clipboard!</div>
 
     <!-- Hidden file input for programmatic upload -->
-    <input type="file" id="programmaticUploadInput" accept="image/*,video/*,application/pdf" style="display: none" />
+    <input
+      type="file"
+      id="programmaticUploadInput"
+      accept="image/*,video/*,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-powerpoint,application/vnd.openxmlformats-officedocument.presentationml.presentation,.doc,.docx,.xls,.xlsx,.ppt,.pptx,audio/mpeg,audio/wav,audio/x-wav,audio/aac,audio/mp4,audio/x-m4a"
+      style="display: none"
+    />
 
     <script type="module">
       // ============================================
